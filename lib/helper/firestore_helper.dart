@@ -7,33 +7,27 @@ class CloudFirestoreHelper {
 
   static final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
-  late CollectionReference authorkepperRef;
+  late CollectionReference votekepperRef;
   void connectWithCollection() {
-    authorkepperRef = firebaseFirestore.collection("vote");
+    votekepperRef = firebaseFirestore.collection("vote");
   }
 
   Future<void> insertrecord({required Map<String, dynamic> data}) async {
     connectWithCollection();
 
-    await authorkepperRef.doc().set(data);
+    await votekepperRef.doc().set(data);
   }
 
   Stream<QuerySnapshot> selectrecord() {
     connectWithCollection();
 
-    return authorkepperRef.snapshots();
+    return votekepperRef.snapshots();
   }
 
   Future<void> updateRecords(
       {required String id, required Map<String, dynamic> data}) async {
     connectWithCollection();
 
-    await authorkepperRef.doc(id).update(data);
-  }
-
-  Future<void> deleterecord({required String id}) async {
-    connectWithCollection();
-
-    await authorkepperRef.doc(id).delete();
+    await votekepperRef.doc(id).update(data);
   }
 }
